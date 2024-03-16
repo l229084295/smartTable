@@ -1,8 +1,9 @@
 package com.bin.david.smarttable.adapter;
 
 import android.net.Uri;
-import android.support.annotation.Nullable;
 import android.widget.ImageView;
+
+import androidx.annotation.Nullable;
 
 import com.bin.david.smarttable.R;
 import com.bin.david.smarttable.bean.MainItem;

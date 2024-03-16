@@ -2,8 +2,6 @@ package com.bin.david.smarttable;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.bin.david.form.core.SmartTable;
@@ -17,6 +15,9 @@ import com.bin.david.smarttable.utils.JsonHelper;
 import com.zhy.http.okhttp.OkHttpUtils;
 
 import static com.bin.david.smarttable.utils.JsonHelper.reflect;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 public class MapModeActivity extends AppCompatActivity {
 

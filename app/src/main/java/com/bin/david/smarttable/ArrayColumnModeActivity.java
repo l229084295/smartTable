@@ -5,8 +5,9 @@ import android.content.res.Resources;
 import android.graphics.DashPathEffect;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.bin.david.form.core.SmartTable;
 import com.bin.david.form.core.TableConfig;

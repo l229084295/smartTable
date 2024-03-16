@@ -2,8 +2,9 @@ package com.bin.david.smarttable.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.support.annotation.Nullable;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
 
 import com.bin.david.form.core.SmartTable;
 import com.bin.david.form.data.column.Column;

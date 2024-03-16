@@ -1,8 +1,9 @@
 package com.bin.david.smarttable;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.bin.david.form.core.SmartTable;
 import com.bin.david.form.data.style.FontStyle;

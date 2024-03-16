@@ -2,12 +2,13 @@ package com.bin.david.smarttable;
 
 import android.graphics.Canvas;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.View;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bin.david.smarttable.adapter.TanTanAdapter;
 import com.bin.david.smarttable.bean.TanBean;
@@ -19,7 +20,7 @@ import java.util.List;
  * Created by huang on 2017/11/9.
  */
 
-public class TanTanActivity extends AppCompatActivity{
+public class TanTanActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
 

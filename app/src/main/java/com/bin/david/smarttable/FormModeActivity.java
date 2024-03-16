@@ -2,12 +2,13 @@ package com.bin.david.smarttable;
 
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.bin.david.form.core.SmartTable;
 import com.bin.david.form.data.CellInfo;

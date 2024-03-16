@@ -6,8 +6,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 import android.widget.Toast;
 
@@ -44,7 +42,10 @@ import java.util.Random;
 
 import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
-public class MinModeActivity extends AppCompatActivity{
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
+public class MinModeActivity extends AppCompatActivity {
 
     private SmartTable<UserInfo> table;
     private Map<String,Bitmap> map = new HashMap<>();

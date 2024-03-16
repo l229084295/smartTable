@@ -1,6 +1,7 @@
 package com.bin.david.smarttable.adapter;
 
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 
 import com.bin.david.smarttable.R;
 import com.bin.david.smarttable.bean.MainItem;

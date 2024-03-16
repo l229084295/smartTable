@@ -6,25 +6,22 @@ import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
 import com.bin.david.form.core.SmartTable;
-import com.bin.david.form.core.TableConfig;
 import com.bin.david.form.data.CellInfo;
-import com.bin.david.form.data.format.bg.IBackgroundFormat;
-import com.bin.david.form.data.format.grid.BaseGridFormat;
-import com.bin.david.form.data.format.selected.IDrawOver;
-import com.bin.david.form.data.format.title.TitleDrawFormat;
-import com.bin.david.form.data.table.ArrayTableData;
 import com.bin.david.form.data.column.Column;
+import com.bin.david.form.data.format.bg.IBackgroundFormat;
 import com.bin.david.form.data.format.bg.ICellBackgroundFormat;
 import com.bin.david.form.data.format.draw.ImageResDrawFormat;
+import com.bin.david.form.data.format.grid.BaseGridFormat;
 import com.bin.david.form.data.style.FontStyle;
 import com.bin.david.form.data.style.LineStyle;
-import com.bin.david.form.utils.BitmapDrawer;
+import com.bin.david.form.data.table.ArrayTableData;
 import com.bin.david.form.utils.DensityUtils;
 import com.bin.david.form.utils.DrawUtils;
 
@@ -68,7 +65,7 @@ public class SeatModeActivity extends AppCompatActivity {
             data[i] = column;
         }
 
-        FontStyle fontStyle = new FontStyle(this,10,ContextCompat.getColor(this,R.color.arc_text));
+        FontStyle fontStyle = new FontStyle(this,10, ContextCompat.getColor(this,R.color.arc_text));
         LineStyle lineStyle = new LineStyle();
         lineStyle.setColor(ContextCompat.getColor(this,R.color.dedede));
         lineStyle.setEffect(new DashPathEffect(new float[] {5, 5}, 0));

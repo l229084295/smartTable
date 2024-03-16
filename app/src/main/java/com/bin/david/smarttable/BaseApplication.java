@@ -1,7 +1,10 @@
 package com.bin.david.smarttable;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
+
+import androidx.multidex.MultiDexApplication;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreator;
@@ -21,11 +24,12 @@ import okhttp3.OkHttpClient;
  * Created by huang on 2017/11/4.
  */
 
-public class BaseApplication extends android.support.multidex.MultiDexApplication {
+public class BaseApplication extends MultiDexApplication {
     //static 代码段可以防止内存泄露
     static {
         //设置全局的Header构建器
         SmartRefreshLayout.setDefaultRefreshHeaderCreator(new DefaultRefreshHeaderCreator() {
+            @SuppressLint("RestrictedApi")
             @Override
             public RefreshHeader createRefreshHeader(Context context, RefreshLayout layout) {
                 layout.setPrimaryColorsId(R.color.windows_bg, R.color.text_color);//全局设置主题颜色
@@ -34,6 +38,7 @@ public class BaseApplication extends android.support.multidex.MultiDexApplicatio
         });
         //设置全局的Footer构建器
         SmartRefreshLayout.setDefaultRefreshFooterCreator(new DefaultRefreshFooterCreator() {
+            @SuppressLint("RestrictedApi")
             @Override
             public RefreshFooter createRefreshFooter(Context context, RefreshLayout layout) {
                 //指定为经典Footer，默认是 BallPulseFooter

@@ -7,10 +7,11 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.bin.david.form.core.SmartTable;
 import com.bin.david.form.core.TableConfig;
@@ -51,7 +52,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 .setShowXSequence(false)
                 .setShowYSequence(false)
                 .setShowTableTitle(false)
-                .setContentGridStyle(new LineStyle(-1,ContextCompat.getColor(this,android.R.color.transparent)));
+                .setContentGridStyle(new LineStyle(-1, ContextCompat.getColor(this,android.R.color.transparent)));
         tableData= ArrayTableData.create(table, "动画", data, null);
         table.setTableData(tableData);
         startAnim0();

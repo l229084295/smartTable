@@ -4,9 +4,10 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.bin.david.form.core.SmartTable;
 import com.bin.david.form.core.TableConfig;
@@ -32,7 +33,7 @@ public class ArrayModeActivity extends AppCompatActivity {
                 {2,2,0,1,2,4,1,0,1,3,0,1,1},{2,1,1,0,1,4,0,1,1,2,2,0,3},
                 {0,1,2,4,1,0,1,4,0,1,1,2,2}, {1,0,1,3,2,2,0,1,2,1,1,0,4},
                 {3,1,2,4,0,1,2,1,1,0,1,1,0}};
-        FontStyle fontStyle = new FontStyle(this,10,ContextCompat.getColor(this,R.color.arc_text));
+        FontStyle fontStyle = new FontStyle(this,10, ContextCompat.getColor(this,R.color.arc_text));
         table.getConfig().setColumnTitleStyle(fontStyle);
         table.getConfig().setHorizontalPadding(0);
 
