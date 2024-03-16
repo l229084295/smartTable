@@ -8,12 +8,13 @@ import android.graphics.Rect;
 import com.bin.david.form.data.column.Column;
 import com.bin.david.form.core.TableConfig;
 import com.bin.david.form.data.format.bg.ICellBackgroundFormat;
+import com.bin.david.form.data.table.TableData;
 
 /**
  * Created by huang on 2017/10/30.
  */
 
-public abstract class BitmapTitleDrawFormat implements ITitleDrawFormat {
+public abstract class BitmapTitleDrawFormat<T> implements ITitleDrawFormat<T> {
 
     private int imageWidth;
     private int imageHeight;
@@ -37,7 +38,7 @@ public abstract class BitmapTitleDrawFormat implements ITitleDrawFormat {
     }
 
     @Override
-    public int measureHeight(TableConfig config) {
+    public int measureHeight(TableData<T> tableData,TableConfig config) {
 
         return imageHeight;
     }
@@ -49,7 +50,7 @@ public abstract class BitmapTitleDrawFormat implements ITitleDrawFormat {
     protected abstract Bitmap getBitmap(Column column);
 
     @Override
-    public void draw(Canvas c, Column column, Rect rect,TableConfig config) {
+    public void draw(Canvas c, TableData<T> tableData, Column column, Rect rect,TableConfig config) {
         Paint paint = config.getPaint();
         drawBackground(c,column,rect,config);
         Bitmap bitmap = getBitmap(column);

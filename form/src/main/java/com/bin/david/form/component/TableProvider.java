@@ -74,7 +74,7 @@ public class TableProvider<T> implements TableClickObserver {
         setData(scaleRect, showRect, tableData, config);
         canvas.save();
         canvas.clipRect(this.showRect);
-        drawColumnTitle(canvas, config);
+        drawColumnTitle(canvas, tableData, config);
         drawCount(canvas);
         drawContent(canvas);
         operation.draw(canvas,showRect,config);
@@ -109,15 +109,15 @@ public class TableProvider<T> implements TableClickObserver {
     }
 
 
-    private void drawColumnTitle(Canvas canvas, TableConfig config) {
+    private void drawColumnTitle(Canvas canvas,TableData<T> tableData, TableConfig config) {
         if(config.isShowColumnTitle()) {
             if (config.isFixedTitle()) {
-                drawTitle(canvas);
+                drawTitle(canvas, tableData);
                 canvas.restore();
                 canvas.save();
                 canvas.clipRect(this.showRect);
             } else {
-                drawTitle(canvas);
+                drawTitle(canvas, tableData);
             }
         }
     }
@@ -175,7 +175,7 @@ public class TableProvider<T> implements TableClickObserver {
      * 绘制列标题
      * @param canvas 画布
      */
-    private void drawTitle(Canvas canvas) {
+    private void drawTitle(Canvas canvas, TableData<T> tableData) {
         int dis = showRect.top - scaleRect.top;
         TableInfo tableInfo = tableData.getTableInfo();
         int titleHeight = tableInfo.getTitleHeight() * tableInfo.getMaxLevel();
@@ -198,7 +198,7 @@ public class TableProvider<T> implements TableClickObserver {
                 if (left < clipRect.left) {
                     parentColumnInfo = info;
                     left = clipRect.left;
-                    fillColumnTitle(canvas, info, left);
+                    fillColumnTitle(canvas, tableData, info, left);
                     clipRect.left += info.width * zoom;
                     isPerColumnFixed = true;
                     continue;
@@ -214,7 +214,7 @@ public class TableProvider<T> implements TableClickObserver {
                 isPerColumnFixed = false;
                 clipCount++;
             }
-            fillColumnTitle(canvas, info, left);
+            fillColumnTitle(canvas, tableData, info, left);
         }
         for(int i = 0;i < clipCount;i++){
             canvas.restore();
@@ -235,7 +235,7 @@ public class TableProvider<T> implements TableClickObserver {
      * @param info 列信息
      * @param left 左边
      */
-    private void fillColumnTitle(Canvas canvas, ColumnInfo info, int left) {
+    private void fillColumnTitle(Canvas canvas,TableData<T> tableData, ColumnInfo info, int left) {
 
         int top = (int)(info.top*config.getZoom())
                 + (config.isFixedTitle() ? showRect.top : scaleRect.top);
@@ -256,7 +256,7 @@ public class TableProvider<T> implements TableClickObserver {
                 int position = tableData.getChildColumns().indexOf(info.column);
                 config.getTableGridFormat().drawColumnTitleGrid(canvas,tempRect,info.column,position,paint);
             }
-            tableData.getTitleDrawFormat().draw(canvas, info.column, tempRect, config);
+            tableData.getTitleDrawFormat().draw(canvas, tableData, info.column, tempRect, config);
 
         }
     }

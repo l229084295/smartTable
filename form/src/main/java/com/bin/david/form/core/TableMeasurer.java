@@ -105,7 +105,7 @@ public class TableMeasurer<T> {
              topHeight = DrawUtils.getTextHeight(config.getXSequenceStyle(), paint)
                     + 2 * config.getSequenceVerticalPadding();
         }
-        int titleHeight = config.isShowColumnTitle()?(tableData.getTitleDrawFormat().measureHeight(config)
+        int titleHeight = config.isShowColumnTitle()?(tableData.getTitleDrawFormat().measureHeight(tableData,config)
                 +2*config.getColumnTitleVerticalPadding()): 0;
         TableInfo tableInfo = tableData.getTableInfo();
         tableInfo.setTitleHeight(titleHeight);

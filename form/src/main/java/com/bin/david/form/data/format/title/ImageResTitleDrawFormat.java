@@ -11,7 +11,7 @@ import com.bin.david.form.data.column.Column;
  * Created by huang on 2017/10/30.
  */
 
-public abstract class ImageResTitleDrawFormat extends BitmapTitleDrawFormat {
+public abstract class ImageResTitleDrawFormat<T> extends BitmapTitleDrawFormat<T> {
 
     private BitmapFactory.Options options = new BitmapFactory.Options();
     //使用缓存

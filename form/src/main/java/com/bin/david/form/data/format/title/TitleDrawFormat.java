@@ -7,13 +7,14 @@ import android.graphics.Rect;
 import com.bin.david.form.data.column.Column;
 import com.bin.david.form.core.TableConfig;
 import com.bin.david.form.data.format.bg.ICellBackgroundFormat;
+import com.bin.david.form.data.table.TableData;
 import com.bin.david.form.utils.DrawUtils;
 
 /**
  * Created by huang on 2017/10/30.
  */
 
-public class TitleDrawFormat implements ITitleDrawFormat {
+public class TitleDrawFormat<T> implements ITitleDrawFormat<T> {
 
     private boolean isDrawBg;
 
@@ -26,14 +27,14 @@ public class TitleDrawFormat implements ITitleDrawFormat {
 
 
     @Override
-    public int measureHeight(TableConfig config) {
+    public int measureHeight(TableData<T> tableData, TableConfig config) {
         Paint paint = config.getPaint();
         config.getColumnTitleStyle().fillPaint(paint);
         return DrawUtils.getTextHeight(config.getColumnTitleStyle(),config.getPaint());
     }
 
     @Override
-    public void draw(Canvas c, Column column, Rect rect, TableConfig config) {
+    public void draw(Canvas c, TableData<T> tableData, Column column, Rect rect, TableConfig config) {
         Paint paint = config.getPaint();
         boolean isDrawBg =drawBackground(c,column,rect,config);
         config.getColumnTitleStyle().fillPaint(paint);
