@@ -1,6 +1,9 @@
 package com.bin.david.smarttable;
 
+import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -9,12 +12,18 @@ import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.bin.david.form.core.SmartTable;
+import com.bin.david.form.core.TableConfig;
 import com.bin.david.form.data.CellInfo;
 import com.bin.david.form.data.column.Column;
+import com.bin.david.form.data.form.IForm;
 import com.bin.david.form.data.format.IFormat;
+import com.bin.david.form.data.format.bg.BaseCellBackgroundFormat;
+import com.bin.david.form.data.format.draw.MultiLineDrawFormat;
 import com.bin.david.form.data.format.grid.BaseGridFormat;
+import com.bin.david.form.data.format.grid.ColorGridFormat;
 import com.bin.david.form.data.format.selected.BaseSelectFormat;
 import com.bin.david.form.data.table.FormTableData;
 import com.bin.david.form.data.table.TableData;
@@ -28,9 +37,6 @@ import com.bin.david.smarttable.bean.Form;
 public class FormModeActivity extends AppCompatActivity {
 
     private SmartTable<Form> table;
-    private View llBottom;
-    private Button searchBtn;
-    private EditText editText;
     private Form selectForm;
 
     @Override
@@ -38,27 +44,17 @@ public class FormModeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_table);
         table = (SmartTable<Form>) findViewById(R.id.table);
-        int dp5 = DensityUtils.dp2px(this,10);
-        table.getConfig().setVerticalPadding(dp5)
-        .setTextLeftOffset(dp5);
-        llBottom = findViewById(R.id.ll_bottom);
-        searchBtn = (Button) findViewById(R.id.tv_query);
-        searchBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(selectForm !=null){
-                    selectForm.setName(editText.getText().toString());
-                    table.invalidate();
-                    editText.setText("");
-                }
-            }
-        });
-        editText = (EditText)findViewById(R.id.edit_query) ;
+        int dp5 = DensityUtils.dp2px(this, 10);
+        table.getConfig().setVerticalPadding(0)
+                .setHorizontalPadding(0)
+                .setColumnTitleVerticalPadding(0)
+                .setColumnTitleHorizontalPadding(0)
+                .setTextLeftOffset(dp5);
         Form[][] forms = {
                 {
-                        new Form("姓名", Paint.Align.LEFT), Form.Empty,
+                        new Form("姓名", Paint.Align.LEFT, Color.parseColor("#D9000000"), Color.parseColor("#ECFFF5"), true), Form.Empty,
                         new Form("性别", Paint.Align.LEFT), Form.Empty,
-                        new Form("出生日期", Paint.Align.LEFT),Form.Empty,
+                        new Form("出生日期", Paint.Align.LEFT), Form.Empty,
                         new Form("民族", Paint.Align.LEFT), Form.Empty,
                         new Form("婚否", Paint.Align.LEFT), Form.Empty,
                         new Form(1, 4, "照片")
@@ -89,7 +85,7 @@ public class FormModeActivity extends AppCompatActivity {
                         new Form(2, 1, "申请职位", Paint.Align.LEFT), new Form(4, 1, "")
                         , new Form(2, 1, "本人要求待遇", Paint.Align.LEFT), new Form(3, 1, "")
                 },
-               {
+                {
                         new Form(11, 1, "家庭成员及主要社会关系")
                 },
 
@@ -155,7 +151,7 @@ public class FormModeActivity extends AppCompatActivity {
                         new Form(11, 1, "本人保证以下资料全部属实，否则本人愿意承担由此造成的一切后果")
                 },
                 {
-                         new Form(2, 1, "申请人签名"), new Form(4, 1, "")
+                        new Form(2, 1, "申请人签名"), new Form(4, 1, "")
                         , new Form(2, 1, "日期"), new Form(3, 1, "")
                 }
 
@@ -171,25 +167,10 @@ public class FormModeActivity extends AppCompatActivity {
                 }
             }
         });
-        table.setSelectFormat(new BaseSelectFormat());
-        tableData.setOnItemClickListener(new TableData.OnItemClickListener<Form>() {
-            @Override
-            public void onClick(Column column, String value, Form form, int col, int row) {
-                if(form !=null){
-                    selectForm = form;
-                    editText.setFocusable(true);
-                    editText.setFocusableInTouchMode(true);
-                    editText.requestFocus();
-                    getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-                }
-
-            }
-
-        });
-        table.getConfig().setTableGridFormat(new BaseGridFormat(){
+        table.getConfig().setTableGridFormat(new BaseGridFormat() {
             @Override
             protected boolean isShowHorizontalLine(int col, int row, CellInfo cellInfo) {
-                if(row == tableData.getLineSize() -1){
+                if (row == tableData.getLineSize() - 1) {
                     return false;
                 }
                 return true;
@@ -197,14 +178,23 @@ public class FormModeActivity extends AppCompatActivity {
 
             @Override
             protected boolean isShowVerticalLine(int col, int row, CellInfo cellInfo) {
-                if(row == tableData.getLineSize() -1){
+                if (row == tableData.getLineSize() - 1) {
                     return false;
                 }
                 return true;
             }
         });
+        table.getConfig().setContentCellBackgroundFormat(new BaseCellBackgroundFormat<CellInfo>() {
+            @Override
+            public int getBackGroundColor(CellInfo cellInfo) {
+                if (cellInfo.data instanceof IForm) {
+                    return ((IForm) cellInfo.data).getBackgroundColor();
+                }
+                return Color.WHITE;
+            }
+        });
+        table.getConfig().setTableGridFormat(new ColorGridFormat(Color.parseColor("#03954C")));
         table.setTableData(tableData);
-
-
+        table.setZoom(false);
     }
 }

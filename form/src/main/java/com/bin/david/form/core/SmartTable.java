@@ -514,16 +514,7 @@ public class SmartTable<T> extends View implements OnTableChangeListener {
 
     @Override
     public int computeHorizontalScrollRange() {
-        final int contentWidth = getWidth() - getPaddingLeft() - getPaddingRight();
-        int scrollRange = matrixHelper.getZoomRect().right;
-        final int scrollX = -matrixHelper.getZoomRect().right;
-        final int overScrollRight = Math.max(0, scrollRange - contentWidth);
-        if (scrollX < 0) {
-            scrollRange -= scrollX;
-        } else if (scrollX > overScrollRight) {
-            scrollRange += scrollX - overScrollRight;
-        }
-        return scrollRange;
+        return matrixHelper.getZoomRect().width();
     }
 
     @Override
@@ -538,42 +529,29 @@ public class SmartTable<T> extends View implements OnTableChangeListener {
 
     @Override
     public int computeHorizontalScrollOffset() {
-        return Math.max(0, -matrixHelper.getZoomRect().top);
+        return Math.max(0, -matrixHelper.getZoomRect().left);
     }
 
 
     @Override
     public int computeHorizontalScrollExtent() {
-        return super.computeHorizontalScrollExtent();
+        //computeHorizontalScrollRange大于computeHorizontalScrollExtent才显示滚动条
+        return getWidth() - getPaddingLeft() - getPaddingRight();
     }
 
     @Override
     public int computeVerticalScrollRange() {
-
-        final int contentHeight = getHeight() - getPaddingBottom() - getPaddingTop();
-        int scrollRange = matrixHelper.getZoomRect().bottom;
-        final int scrollY = -matrixHelper.getZoomRect().left;
-        final int overScrollBottom = Math.max(0, scrollRange - contentHeight);
-        if (scrollY < 0) {
-            scrollRange -= scrollY;
-        } else if (scrollY > overScrollBottom) {
-            scrollRange += scrollY - overScrollBottom;
-        }
-
-        return scrollRange;
+        return matrixHelper.getZoomRect().height();
     }
 
     @Override
     public int computeVerticalScrollOffset() {
-
-        return Math.max(0, -matrixHelper.getZoomRect().left);
+        return Math.max(0, -matrixHelper.getZoomRect().top);
     }
 
     @Override
     public int computeVerticalScrollExtent() {
-
-        return super.computeVerticalScrollExtent();
-
+        return getHeight() - getPaddingBottom() - getPaddingTop();
     }
 
     public XSequence<T> getXSequence() {

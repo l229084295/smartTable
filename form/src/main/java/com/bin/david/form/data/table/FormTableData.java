@@ -1,6 +1,7 @@
 package com.bin.david.form.data.table;
 
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.util.Log;
 
 import com.bin.david.form.core.SmartTable;
@@ -61,7 +62,14 @@ public class FormTableData<T extends IForm> extends ArrayTableData<T>{
             public void setTextPaint(TableConfig config, CellInfo<T> cellInfo, Paint paint) {
                 super.setTextPaint(config, cellInfo, paint);
                 paint.setTextAlign(cellInfo.data == null? Paint.Align.CENTER:cellInfo.data.getAlign());
-
+                if (cellInfo.data != null){
+                    paint.setColor(cellInfo.data.getTextColor());
+                    if (cellInfo.data.isBold()){
+                        paint.setTypeface(Typeface.DEFAULT_BOLD);
+                    }else {
+                        paint.setTypeface(Typeface.DEFAULT);
+                    }
+                }
             }
         });
         tableData.setUserCellRange(cellRanges);

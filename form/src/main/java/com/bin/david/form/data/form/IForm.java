@@ -12,4 +12,9 @@ public interface IForm {
     int getSpanHeightSize();
     Paint.Align getAlign();
 
+    int getTextColor();
+    int getBackgroundColor();
+    boolean isBold();
+
+
 }
