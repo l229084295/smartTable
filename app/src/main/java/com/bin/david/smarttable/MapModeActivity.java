@@ -82,9 +82,14 @@ public class MapModeActivity extends AppCompatActivity {
         String json="{\"name\":\"BeJson\",\"url\":\"http://www.bejson.com\",\"page\":88,\"isNonProfit\":true,\"links\":[{\"name\":\"Google\",\"url\":\"http://www.google.com\"},{\"name\":\"Baidu\",\"url\":\"http://www.baidu.com\"},{\"name\":\"SoSo\",\"url\":\"http://www.SoSo.com\"},{\"name\":\"Google\",\"url\":\"http://www.google.com\"},{\"name\":\"Baidu\",\"url\":\"http://www.baidu.com\"},{\"name\":\"SoSo\",\"url\":\"http://www.SoSo.com\"},{\"name\":\"Google\",\"url\":\"http://www.google.com\"},{\"name\":\"Baidu\",\"url\":\"http://www.baidu.com\"},{\"name\":\"SoSo\",\"url\":\"http://www.SoSo.com\"},{\"name\":\"Google\",\"url\":\"http://www.google.com\"},{\"name\":\"Baidu\",\"url\":\"http://www.baidu.com\"},{\"name\":\"SoSo\",\"url\":\"http://www.SoSo.com\"}]}";
         MapTableData tableData = MapTableData.create("Json表格",JsonHelper.jsonToMapList(json));
         tableData.setOnItemClickListener((column, value, o, col, row) -> {
-            currentClickPosition = row;
-            table.invalidate();
-            Log.e("onClick","所在行: " + row+" ,所在列: " + col);
+            try {
+                currentClickPosition = row;
+                table.invalidate();
+                Log.e("onClick","所在行: " + row+" ,所在列: " + col + ",column:" + column.getFieldName());
+                Log.e("firstColumnValue:",tableData.getChildColumns().get(4).getDatas().get(currentClickPosition)+"");
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         });
         table.setTableData(tableData);
     }
