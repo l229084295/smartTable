@@ -23,6 +23,7 @@ import com.bin.david.form.data.TableInfo;
 import com.bin.david.form.data.format.selected.ISelectFormat;
 import com.bin.david.form.data.style.FontStyle;
 import com.bin.david.form.listener.OnColumnClickListener;
+import com.bin.david.form.listener.OnMeasureCompletedListener;
 import com.bin.david.form.listener.OnTableChangeListener;
 import com.bin.david.form.matrix.MatrixHelper;
 import com.bin.david.form.utils.DensityUtils;
@@ -56,6 +57,8 @@ public class SmartTable<T> extends View implements OnTableChangeListener {
     private boolean isExactly = true; //是否是测量精准模式
     private AtomicBoolean isNotifying = new AtomicBoolean(false); //是否正在更新数据
     private boolean isYSequenceRight;
+
+    private OnMeasureCompletedListener onMeasureCompletedListener;
 
 
     public SmartTable(Context context) {
@@ -236,6 +239,9 @@ public class SmartTable<T> extends View implements OnTableChangeListener {
                     requestReMeasure();
                     postInvalidate();
                     isNotifying.set(false);
+                    if (onMeasureCompletedListener!=null){
+                        onMeasureCompletedListener.onMeasured(info.getTableRect());
+                    }
                     //long end = System.currentTimeMillis();
                     //Log.e("smartTable","notifyDataChanged timeMillis="+(end-start));
                 }
@@ -596,6 +602,10 @@ public class SmartTable<T> extends View implements OnTableChangeListener {
 
     public void setYSequenceRight(boolean YSequenceRight) {
         isYSequenceRight = YSequenceRight;
+    }
+
+    public void setOnMeasureCompletedListener(OnMeasureCompletedListener onMeasureCompletedListener){
+        this.onMeasureCompletedListener = onMeasureCompletedListener;
     }
 }
 
